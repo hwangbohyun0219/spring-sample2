@@ -13,6 +13,11 @@
 	<div id="app">
 		제목 : {{info.title}}<br>
 		내용 : <div v-html="info.contents"></div>
+		작성자 : <span>{{info.userId}}</span>
+		<div v-if = "sessionId == info.userId || sessionStatus == 'A'">
+			<button>삭제</button>
+		</div>
+		
 	</div>
 </body>
 </html>
@@ -21,7 +26,9 @@
         data() {
             return {
 				boardNo : '${boardNo}',
-				info : {}
+				info : {},
+				sessionId : '${sessionId}',
+				sessionStatus : '${sessionStatus}'
             };
         },
         methods: {

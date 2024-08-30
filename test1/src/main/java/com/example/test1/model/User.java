@@ -8,8 +8,10 @@ public class User {
 	private String pwd;
 	private String userName;
 	private String email;
+	
 	private String phone;
 	private String gender;
+	private String status;
 	
 	public String getUserId() {
 		return userId;
@@ -17,5 +19,10 @@ public class User {
 	public String getUserName() {
 		return userName;
 	}
-	
+	public String getEmail() {
+		return email;
+	}
+	public String getStatus() {
+		return status;
+	}
 }

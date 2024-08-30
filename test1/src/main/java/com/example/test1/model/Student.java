@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Student {
 	// student 테이블 컬럼
-	private String stuNo;
+	//private String stuNo;
 	private String stuName;
 	private String stuDept;
 	private String stuGrade;

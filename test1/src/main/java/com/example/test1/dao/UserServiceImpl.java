@@ -112,6 +112,9 @@ public class UserServiceImpl implements UserService{
 				resultMap.put("message", "로그인 성공!");
 				session.setAttribute("sessionId", user.getUserId());
 				session.setAttribute("sessionName", user.getUserName());
+				session.setAttribute("sessionEmail", user.getEmail());
+				session.setAttribute("sessionStatus", user.getStatus());
+				
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

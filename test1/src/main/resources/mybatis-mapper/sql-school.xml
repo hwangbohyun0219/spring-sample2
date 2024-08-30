@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.test1.mapper.SchoolMapper">
+	
+	<select id="selectSchool" parameterType="hashmap" resultType="com.example.test1.model.School">
+		SELECT * 
+		FROM STU 
+	</select>
+	
+	<delete id="deleteSchool" parameterType="hashmap" >
+		DELETE 
+		FROM stu WHERE stuNo = #{stuNo}
+	</delete>
+	
+</mapper>

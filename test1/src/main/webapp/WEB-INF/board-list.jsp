@@ -51,7 +51,11 @@
 				<td>{{item.userName}}</td>
 				<td>{{item.hit}}</td>
 				<td>{{item.cdateTime}}</td>
-				<td><button @click="fnRemove(item.boardNo)">삭제</button></td>
+				<td>
+					<template v-if = "sessionEmail == item.email ||  sessionStatus == 'A'">
+						<button @click="fnRemove(item.boardNo)">삭제</button>
+					</template>
+				</td>
 			</tr>	
 		</table>
 	</div>
@@ -64,7 +68,10 @@
 				list : [],
 				keyword : "",
 				searchOption : "all",
-				category : ""
+				category : "",
+				sessionEmail : '${sessionEmail}',
+				sessionStatus : '${sessionStatus}'
+				
             };
         },
         methods: {

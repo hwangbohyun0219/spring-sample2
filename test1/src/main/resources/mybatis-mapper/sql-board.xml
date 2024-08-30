@@ -33,10 +33,7 @@
 				OR USERNAME LIKE '%' || #{keyword} || '%'
 			</otherwise>
 		</choose>-->
-		
-		
-		
-	</select>
+		</select>
 	
 	<delete id="deleteBoard" parameterType="hashmap">
 		DELETE 

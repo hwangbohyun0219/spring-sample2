@@ -16,6 +16,7 @@ public class Board {
 	private String noticeYn;
 	private String cdateTime;
 	private String udateTime;
+	private String email;
 	
 	private String userName;
 }
