@@ -72,6 +72,10 @@ public class BoardServiceImpl implements BoardService{
 				new HashMap<String, Object>();
 		try {
 			Board board = boardMapper.selectBoardInfo(map);
+			System.out.println(map);
+			List<Board> selectcomment = boardMapper.selectComment(map);
+			System.out.println(selectcomment);
+			resultMap.put("selectcomment", selectcomment);
 			resultMap.put("info", board);
 			resultMap.put("result", "success");
 			resultMap.put("message", "검색되었습니다.");
@@ -82,5 +86,6 @@ public class BoardServiceImpl implements BoardService{
 		}
 		return resultMap;
 	}
+
 	
 }

@@ -18,6 +18,7 @@
 			<button>삭제</button>
 		</div>
 		
+		
 	</div>
 </body>
 </html>
@@ -46,7 +47,8 @@
 						self.info = data.info;
 					}
 				});
-            }
+            },
+			
         },
         mounted() {
 			var self = this;

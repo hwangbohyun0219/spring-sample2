@@ -60,10 +60,12 @@
 	</select>
 	
 	
-
-	
-	
-	
+	<select id="selectComment" parameterType="hashmap" resultType="com.example.test1.model.Board">
+		SELECT * 
+		FROM TBL_COMMENT C 
+		INNER JOIN TBL_USER U ON C.USERID = U.USERID 
+		WHERE BOARDNO = #{boardNo}
+	</select>
 	
 	
 	

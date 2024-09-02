@@ -24,11 +24,12 @@ public class SchoolServiceImpl implements SchoolService {
 		HashMap<String, Object> resultMap 
 		= new HashMap<String, Object>();
 		
-		//int count = schoolMapper.selectSchoolCnt(map);
+		int count = schoolMapper.selectSchoolCnt(map);
 		List<School> school = schoolMapper.selectSchool(map);
 		System.out.println(map);
+		
 		resultMap.put("stuList", school);
-		//resultMap.put("count", count);
+		resultMap.put("count", count);
 		
 		return resultMap;
 		
