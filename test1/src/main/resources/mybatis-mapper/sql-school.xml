@@ -7,6 +7,8 @@
 	<select id="selectSchool" parameterType="hashmap" resultType="com.example.test1.model.School">
 		SELECT * 
 		FROM STU 
+		ORDER BY HEIGHT ASC
+		OFFSET #{currentPage} ROWS FETCH FIRST #{pageSize} ROWS ONLY
 	</select>
 	
 	<delete id="deleteSchool" parameterType="hashmap" >
@@ -14,4 +16,8 @@
 		FROM stu WHERE stuNo = #{stuNo}
 	</delete>
 	
+	<select id = "selectSchoolCnt" parameterType="hashmap">
+		SELECT COUNT(*) AS CNT FROM stu
+	</select>
+
 </mapper>

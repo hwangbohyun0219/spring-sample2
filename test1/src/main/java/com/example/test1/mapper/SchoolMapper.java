@@ -14,4 +14,6 @@ public interface SchoolMapper {
 	
 	public void deleteSchool(HashMap<String, Object> map);
 	
+	int selectSchoolCnt(HashMap<String, Object> map);
+	
 }

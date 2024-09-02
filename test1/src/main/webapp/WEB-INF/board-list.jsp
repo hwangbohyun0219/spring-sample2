@@ -17,9 +17,47 @@
 		border-collapse: collapse;
 	}
 	
-	
+	.pagination {
+		    justify-content: center;
+		    align-items: center;
+		    margin: 20px 0;
+		}
+		.pagination button {
+		    background-color: #f8f9fa;
+		    border: 1px solid #dee2e6;
+		    color: #007bff;
+		    padding: 8px 12px;
+		    margin: 0 2px;
+		    cursor: pointer;
+		    transition: background-color 0.3s, color 0.3s;
+		    border-radius: 4px;
+		}
+
+		.pagination button:hover {
+		    background-color: #007bff;
+		    color: white;
+		}
+
+		.pagination button.active {
+		    background-color: #007bff;
+		    color: white;
+		    cursor: default;
+		}
+
+		.pagination button:disabled {
+		    background-color: #e9ecef;
+		    color: #6c757d;
+		    cursor: not-allowed;
+		    border: 1px solid #dee2e6;
+		}
+
+		.pagination button:not(.active):not(:disabled):hover {
+		    background-color: #0056b3;
+		    color: white;
+		}
 </style>
 <body>
+	
 	<div id="app">
 		<ul style="margin : 20px;">
 			<li><a href="#" @click="fnCategory('')">전체</a></li>
@@ -34,8 +72,15 @@
 				<option value="name">작성자</option>
 			</select>
 			<input placeholder="검색어" v-model="keyword">
-			<button @click="fnGetList">검색</button>
+			<button @click="fnGetList(1)">검색</button>
 		</div> 
+		
+		<select v-model="selectSize" @change="fnGetList(1)">
+			<option value="5">5개씩</option>
+			<option value="10">10개씩</option>
+			<option value="15">15개씩</option>			
+		</select>
+		
 		<table>
 			<tr>
 				<th>게시글번호</th>
@@ -58,7 +103,17 @@
 				</td>
 			</tr>	
 		</table>
+				
+	<div class="pagination">
+	    <button v-if="currentPage > 1">이전</button>
+	    <button v-for="page in totalPages" :class="{active: page == currentPage}" @click="fnGetList(page)">
+	        {{ page }}
+	    </button>
+	    <button v-if="currentPage < totalPages">다음</button>
 	</div>
+
+</div>
+	
 </body>
 </html>
 <script>
@@ -70,17 +125,26 @@
 				searchOption : "all",
 				category : "",
 				sessionEmail : '${sessionEmail}',
-				sessionStatus : '${sessionStatus}'
-				
+				sessionStatus : '${sessionStatus}',
+				currentPage : 1,
+				pageSize : 5,
+				totalPages : 1,
+				selectSize : 5
             };
         },
         methods: {
-            fnGetList(){
+            fnGetList(page){
 				var self = this;
+				self.pageSize = self.selectSize;
+				var currentPage = (page - 1) * self.pageSize;
+				var selectSize = self.selectSize; 
+				var pageSize = self.pageSize;
 				var nparmap = {
 					keyword : self.keyword,
 					searchOption : self.searchOption,
-					category : self.category
+					category : self.category,
+					pageSize : pageSize,
+					currentPage : currentPage
 				};
 				$.ajax({
 					url:"board-list.dox",
@@ -90,9 +154,12 @@
 					success : function(data) { 
 						console.log(data);
 						self.list = data.list;
+						self.currentPage = page;
+						self.totalPages = Math.ceil(data.count / self.pageSize);
 					}
 				});
             },
+			
 			fnRemove(num) {
 				var self = this;
 				var nparmap = {boardNo : num};
@@ -119,7 +186,7 @@
         },
         mounted() {
             var self = this;
-			self.fnGetList();
+			self.fnGetList(1);
         }
     });
     app.mount('#app');

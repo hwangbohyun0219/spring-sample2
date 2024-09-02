@@ -34,7 +34,8 @@
         methods: {
 			fnGetInfo(){
 				var self = this;
-				var nparmap = {boardNo : self.boardNo};
+				var nparmap = {boardNo : self.boardNo,
+				};
 				$.ajax({
 					url:"board-view.dox",
 					dataType:"json",	

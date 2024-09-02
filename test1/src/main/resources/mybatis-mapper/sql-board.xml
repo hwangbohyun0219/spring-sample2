@@ -21,6 +21,8 @@
 		<if test="searchOption == 'name'">
 			AND USERNAME LIKE '%' || #{keyword} || '%'
 		</if>
+			ORDER BY CDATETIME ASC
+			OFFSET #{currentPage} ROWS FETCH FIRST #{pageSize} ROWS ONLY
 		<!--<choose>
 			<when test="searchOption == 'title'">
 				TITLE LIKE '%' || #{keyword} || '%'
@@ -33,6 +35,11 @@
 				OR USERNAME LIKE '%' || #{keyword} || '%'
 			</otherwise>
 		</choose>-->
+		</select>
+		
+		<select id = "selectBoardListCnt" parameterType="hashmap" resultType="int">
+			SELECT COUNT(*) AS CNT
+			FROM TBL_BOARD
 		</select>
 	
 	<delete id="deleteBoard" parameterType="hashmap">
@@ -53,7 +60,7 @@
 	</select>
 	
 	
-	
+
 	
 	
 	

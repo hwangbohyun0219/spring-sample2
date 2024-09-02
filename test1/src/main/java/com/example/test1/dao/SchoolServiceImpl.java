@@ -19,15 +19,20 @@ public class SchoolServiceImpl implements SchoolService {
 	@Override
 	public HashMap<String, Object> selectSchool(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
+		System.out.println(map);
+		
 		HashMap<String, Object> resultMap 
 		= new HashMap<String, Object>();
 		
+		//int count = schoolMapper.selectSchoolCnt(map);
 		List<School> school = schoolMapper.selectSchool(map);
-		
+		System.out.println(map);
 		resultMap.put("stuList", school);
-
+		//resultMap.put("count", count);
 		
 		return resultMap;
+		
+		
 	}
 
 	
