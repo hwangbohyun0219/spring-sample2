@@ -14,4 +14,6 @@ public interface ChartMapper {
 	
 	List<Chart> selectPaymentList(HashMap<String, Object> map);
 	
+	List<Chart> selectAreaList(HashMap<String, Object> map);
+	
 }

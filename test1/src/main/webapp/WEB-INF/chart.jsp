@@ -7,6 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue-apexcharts"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -16,14 +17,20 @@
 <div id="app">
 	<div id="chart">
       <apexchart type="area" height="350" :options="chartOptions" :series="series"></apexchart>
-    </div>	  
+    </div>	
+	
+	<button @click="fnPayment()">결제하기</button>  
 		  
+	
+	
 </div>
 </body>
 </html>
 
 <script>
-	
+	const userCode = "imp24158453"; 
+		IMP.init(userCode);
+		
 var app = new Vue({
 	el : '#app',
 	components: {
@@ -61,10 +68,34 @@ var app = new Vue({
           },
           xaxis: {
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-          }
+          },
         }
 	},// data
 	methods : {
+		fnPayment(){
+			IMP.request_pay({
+			    pg: "html5_inicis",
+			    pay_method: "card",
+			    merchant_uid: "test1",
+			    name: "테스트 결제",
+			    amount: 1,
+			    buyer_tel: "010-0000-0000",
+			  }	, function (rsp) { // callback
+		   	      if (rsp.success) {
+		   	        // 결제 성공 시
+					alert("성공");
+					console.log(rsp);
+		   	      } else {
+		   	        // 결제 실패 시
+					alert("실패");
+					
+		   	      }
+
+				  
+	   	  	});
+		},
+		
+		
 		fnGetList(){
 			var self = this;
 			var nparmap = {
@@ -77,6 +108,7 @@ var app = new Vue({
 				success : function(data) { 
 					console.log(data);
 					var priceList = [];
+					var dataList = [];
 					for(var i=0; i<data.list.length; i++){
 						priceList.push(data.list[i].price);
 						dataList.push(data.list[i].pDate);
@@ -86,6 +118,9 @@ var app = new Vue({
 					//console.log(self.series);
 					
 					self.fnChart(priceList, dataList);
+					
+					
+					
 					
 				}
 			});
@@ -125,7 +160,12 @@ var app = new Vue({
 			            categories: dataList,
 			          }
 			        }
-				}
+				},
+				
+				
+				
+				
+				
 		
 	}, // methods
 	created : function() {
@@ -133,6 +173,11 @@ var app = new Vue({
 		self.fnGetList();
 	}// created
 });
+
+
+
+
+
 
 
 </script>

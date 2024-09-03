@@ -78,7 +78,7 @@
 		</table>
 		
 		<div>
-			<select v-model="selectSize" @change="fnGetList(1)">
+			<select v-model="selectSize" @change="fnGetList()">
 				<option value="5">5개씩</option>
 				<option value="10">10개씩</option>
 				<option value="15">15개씩</option>

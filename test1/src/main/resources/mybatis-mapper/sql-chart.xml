@@ -9,4 +9,5 @@
 		SELECT * FROM TBL_PAYMENT
 	</select>
 
+
 </mapper>

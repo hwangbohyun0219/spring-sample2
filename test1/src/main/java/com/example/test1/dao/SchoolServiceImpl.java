@@ -64,11 +64,12 @@ public class SchoolServiceImpl implements SchoolService {
 		System.out.println(map);
 		int count = schoolMapper.selectSchoolCnt(map);
 		
-		List<School> school = schoolMapper.selectSchool(map);
+		int school = schoolMapper.selectSchoolCnt(map);
 		
 		resultMap.put("stuList", school);
 		resultMap.put("count", count);
-		
+		resultMap.put("school", school);
 		return resultMap;
+		
 	}
 }
