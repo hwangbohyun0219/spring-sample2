@@ -7,4 +7,6 @@ public interface SchoolService {
 	HashMap<String, Object> selectSchool(HashMap<String, Object> map);
 	
 	HashMap<String, Object> deleteSchool(HashMap<String, Object> map);
+	
+	HashMap<String, Object> selectSchoolCnt(HashMap<String, Object> map);
 }

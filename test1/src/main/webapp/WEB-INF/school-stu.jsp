@@ -105,7 +105,7 @@
 				currentPage : 1,
 				pageSize : 10,
 				totalPages : 1,
-				selectSize : 5,
+				selectSize : 5
             };
         },
         methods: {
@@ -114,7 +114,7 @@
 				self.pageSize = self.selectSize;
 				var currentPage = (page - 1) * self.pageSize;
 				self.selectSize = self.selectSize;
-				self.pageSize = self.pageSize;
+				var pageSize = self.pageSize;
 				var nparmap = {
 					currentPage : self.currentPage,
 					pageSize : pageSize
