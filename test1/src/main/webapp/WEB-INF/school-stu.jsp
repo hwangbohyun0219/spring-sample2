@@ -53,7 +53,7 @@
 	<div id="app">
 		<i class="fa-solid fa-money-check-dollar"></i>
 		<span class="material-symbols-outlined">
-		home
+			home
 		</span>
 		<table>
 			<tr>
@@ -78,7 +78,7 @@
 		</table>
 		
 		<div>
-			<select v-model="selectSize" @change="fnGetList()">
+			<select v-model="selectSize" @change="fnGetList(1)">
 				<option value="5">5개씩</option>
 				<option value="10">10개씩</option>
 				<option value="15">15개씩</option>
@@ -87,7 +87,7 @@
 		
 		<div class="pagination">
 		    <button v-if="currentPage > 1">이전</button>
-		    <button v-for="page in totalPages" :class="{active: page == currentPage}" @click="fnGetlist(page)">
+		    <button v-for="page in totalPages" :class="{active: page == currentPage}" @click="fnGetList(1)">
 		        {{ page }}
 		    </button>
 		    <button v-if="currentPage < totalPages">다음</button>
@@ -125,8 +125,8 @@
 					type : "POST", 
 					data : nparmap,
 					success : function(data) { 
-						console.log(data.stuList);
-						self.list = data.stuList;
+						console.log(data.list);
+						self.list = data.list;
 						self.currentPage = page;
 						self.totalPages = Math.ceil(data.count / self.pageSize);
 						

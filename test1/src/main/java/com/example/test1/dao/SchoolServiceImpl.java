@@ -62,13 +62,13 @@ public class SchoolServiceImpl implements SchoolService {
 		HashMap<String, Object> resultMap 
 		= new HashMap<String, Object>();
 		System.out.println(map);
+		
 		int count = schoolMapper.selectSchoolCnt(map);
+		List<School> list = schoolMapper.selectSchool(map);
 		
-		int school = schoolMapper.selectSchoolCnt(map);
-		
-		resultMap.put("stuList", school);
+		resultMap.put("list", list);
 		resultMap.put("count", count);
-		resultMap.put("school", school);
+		resultMap.put("message", "success");
 		return resultMap;
 		
 	}

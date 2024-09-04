@@ -27,7 +27,7 @@ public class BoardController {
 
         return "/board-list";
     }
-	
+
 	
 	// 게시글 작성
 	@RequestMapping("/board-insert.do") 

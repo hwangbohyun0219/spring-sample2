@@ -16,7 +16,7 @@
 		FROM stu WHERE stuNo = #{stuNo}
 	</delete>
 	
-	<select id = "selectSchoolCnt" parameterType="hashmap">
+	<select id = "selectSchoolCnt" parameterType="hashmap" resultType="com.example.test1.model.School">
 		SELECT COUNT(*) AS CNT FROM stu
 	</select>
 
