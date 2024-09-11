@@ -57,6 +57,7 @@
         methods: {
 			fnGetJoinus(){
 				var self = this;
+				if()
 				$.ajax({
 					url:"joinus.dox",
 					dataType:"json",	

@@ -83,6 +83,7 @@
 		
 		<table>
 			<tr>
+				<th></th>
 				<th>게시글번호</th>
 				<th>제목</th>
 				<th>작성자</th>
@@ -91,6 +92,9 @@
 				<th>삭제</th>
 			</tr>
 			<tr v-for="item in list">
+				<td>
+				<input type="checkbox" v-model="selectItem">
+				</td>
 				<td>{{item.boardNo}}</td>
 				<td><a href="#" @click="fnView(item.boardNo)">{{item.title}}</a></td>
 				<td>{{item.userName}}</td>
@@ -103,7 +107,7 @@
 				</td>
 			</tr>	
 		</table>
-				
+				<button @click="fnCheckRemove">삭제</button>
 	<div class="pagination">
 	    <button v-if="currentPage > 1">이전</button>
 	    <button v-for="page in totalPages" :class="{active: page == currentPage}" @click="fnGetList(page)">
@@ -129,7 +133,8 @@
 				currentPage : 1,
 				pageSize : 5,
 				totalPages : 1,
-				selectSize : 5
+				selectSize : 5,
+				selectItem : []
             };
         },
         methods: {
@@ -182,7 +187,13 @@
 				var self = this;
 				self.category = category;
 				self.fnGetList();
+			},
+			fnCheckRemove(){
+				var self = this;
+				console.log(self.selectItem);
 			}
+			
+			
         },
         mounted() {
             var self = this;

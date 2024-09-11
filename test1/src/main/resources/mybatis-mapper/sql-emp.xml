@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.test1.mapper.EmpMapper">
+	
+
+	<select id = "selectEmpList" parameterType="hashmap" resultType="com.example.test1.model.Emp">
+		SELECT b.ITEM_NO, b.ITEM_NAME, b.PRICE, a.CODE_NAME
+		FROM TBL_CODE a 
+		INNER JOIN TBL_ITEM b 
+		ON a.CODE = b.CATEGORY1
+	</select>
+	
+	<select id = "selectEmpList" parameterType="hashmap" resultType="com.example.test1.model.Emp">
+		SELECT SI
+		FROM AREA
+		GROUP BY SI
+		ORDER BY SI
+	</select>
+	
+	<select id = "selectEmpList" parameterType="hashmap" resultType="com.example.test1.model.Emp">
+		SELECT SI, GU
+		FROM AREA
+		WHERE SI = #{si} AND GU IS NOT NULL
+		GROUP BY SI, GU
+		ORDER BY GU
+	</select>
+	
+	
+	<select id = "selectEmpList" parameterType="hashmap" resultType="com.example.test1.model.Emp">
+		SELECT SI, GU, DONG
+		FROM AREA
+		WHERE SI = #{si} AND GU = #{gu} AND DONG IS NOT NULL
+		GROUP BY SI, GU, DONG
+		ORDER BY GU
+	</select>
+	
+</mapper>

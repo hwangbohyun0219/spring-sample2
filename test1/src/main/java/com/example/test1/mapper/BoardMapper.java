@@ -21,6 +21,8 @@ public interface BoardMapper {
 	Board selectBoardInfo(HashMap<String, Object> map);
 	
 	int selectBoardListCnt(HashMap<String, Object> map);
-	
+	//댓글목록
 	List<Board> selectComment(HashMap<String, Object> map);
+	//파일 업로드
+	void insertBoardFile(HashMap<String, Object> map);
 }

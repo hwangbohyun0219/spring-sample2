@@ -32,8 +32,12 @@
 	<div id="app">
 		<table>
 			<tr>
-				<th>제목</th>
+				<th>제목1</th>
 				<td><input id="title" v-model="title"></td>
+			</tr>
+			<tr>
+				<th>첨부파일</th>
+				<td><input type="file" @change="fnFileChange"/></td>
 			</tr>
 			<tr>
 				<th>내용</th>
@@ -50,26 +54,56 @@
             return {
 				title : "",
 				contents : "",
-				userId : self.sessionId
+				userId : self.sessionId,
+				file : null
             };
         },
         methods: {
+			fnFileChange(event) {
+				this.file = event.target.files[0];
+			},
+			
 			fnSave (){
 				var self = this;
-				var nparam = {title : self.title, contents : self.contents};
+				var nparam = {
+					title : self.title, 
+					contents : self.contents,
+					userId : self.sessionId
+					
+				};
 				$.ajax({
 					url:"board-add.dox",
 					dataType:"json",	
 					type : "POST", 
 					data : nparam,
 					success : function(data) { 
-						alert(data.message);
-						if(data.result == "success"){
-							location.href = "board-list.do"
+						var idx = data.idx;
+						console.log(idx);
+						//파일 등록
+						
+						if (self.file) {
+						  const formData = new FormData();
+						  formData.append('file1', self.file);
+						  formData.append('idx', idx);
+
+						  $.ajax({
+							url: '/fileUpload.dox',
+							type: 'POST',
+							data: formData,
+							processData: false,  
+							contentType: false,  
+							success: function() {
+							  console.log('업로드 성공!');
+							},
+							error: function(jqXHR, textStatus, errorThrown) {
+							  console.error('업로드 실패!', textStatus, errorThrown);
+							}
+						  });
 						}
 					}
 				});
-			}
+			},
+
         },
         mounted() {
 			var self = this;

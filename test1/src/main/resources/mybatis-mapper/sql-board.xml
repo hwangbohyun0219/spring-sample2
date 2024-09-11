@@ -4,9 +4,12 @@
 
 <mapper namespace="com.example.test1.mapper.BoardMapper">
 	<select id="selectBoardList" parameterType="hashmap" resultType="com.example.test1.model.Board">
-		SELECT *
-		FROM TBL_BOARD B
-		INNER JOIN TBL_USER U ON B.USERID = U.USERID
+		SELECT * 
+    	CASE
+        WHEN TRUNC(CDATETIME) = TRUNC(SYSDATE) THEN TO_CHAR(CDATETIME, 'HH24:MI:SS')
+        ELSE TO_CHAR(CDATETIME, 'YYYY_MM_DD')
+   		END AS formatted_date
+		FROM TBL_BOATD;
 		WHERE 1=1
 		<if test="category != '' and category != null">
 			AND CATEGORY = #{category}
@@ -48,7 +51,7 @@
 		WHERE BOARDNO = #{boardNo}
 	</delete>
 	
-	<insert id="insertBoard" parameterType="hashmap">
+	<insert id="insertBoard" parameterType="hashmap" useGeneratedKeys="true" keyProperty="boardNo" keyColumn="boardNo">
 		INSERT INTO TBL_BOARD(BOARDNO, TITLE, CONTENTS, USERID, HIT, CDATETIME, UDATETIME) 
 		VALUES(BOARD_SEQ.NEXTVAL, #{title}, #{contents}, 'test1', 0, SYSDATE, SYSDATE)
 	</insert>
@@ -69,7 +72,10 @@
 	
 	
 	
-	
+	<insert id="insertBoardFile" parameterType="hashmap">
+		INSERT INTO TBL_BOARDFILE 
+		VALUES(BOARDFILE_SEQ.NEXTVAL, #{idx}, #{filename}, #{fileOrgName}, #{filepath}, #{fileSize}, #{fileExt}, 'N')
+	</insert>
 	
 	
 </mapper>
